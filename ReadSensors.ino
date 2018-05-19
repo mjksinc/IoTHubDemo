@@ -7,18 +7,22 @@
   * Aggregates message reading functions and new measurements here
   */
 String readSensorMeasurements() {  
-  char* totalMessage;
+  String totalMessage;
   String bufferMessage;
 
   bufferMessage = readAccelSensor();
+  totalMessage+=bufferMessage;
+  
+  bufferMessage = readTempSensor();
+  totalMessage+=bufferMessage;
 
-  //readTempSensor()
-  //readLightSensor()
+  bufferMessage = readLightSensor();
+  totalMessage+=bufferMessage;
 
   Serial.println(">>Message");
-  Serial.println(bufferMessage);
+  Serial.println(totalMessage);
 
-  return(bufferMessage);
+  return(totalMessage);
 
 }
 
@@ -34,9 +38,6 @@ String readAccelSensor() {
   Serial.println("***Reading Accelerometer***");
   if (accel.available()) {
     accel.read();
-    dtostrf(accel.cx, 2, 3, ax_string);
-    dtostrf(accel.cy, 2, 3, ay_string);
-    dtostrf(accel.cz, 2, 3, az_string);
 
     formattedAccelMeasurements = "\"accelerometer_x\": \"";
     formattedAccelMeasurements += accel.cx;
@@ -56,15 +57,34 @@ String readAccelSensor() {
   
 }
 
-//char* readTempSensor() {
-//
-//  temperature = random(13, 15)+(random(1, 99)*0.01);
-//  
-//}
-//
-//char* readLightSensor() {
-//  light = random(100, 300)+(random(1, 99)*0.01);
-//}
+String readTempSensor() {
+  char temperature[15];
+  String formattedTempMeasurements;
+
+  Serial.println("***Reading Temperature***");
+  IoTDevice.getTemperature(temperature);
+
+  formattedTempMeasurements = ", \"temperature\": \"";
+  formattedTempMeasurements+= temperature;
+  formattedTempMeasurements += "\"";
+
+  return formattedTempMeasurements;
+  
+}
+
+String readLightSensor() {
+  char lightReading[15];
+  String formattedLightMeasurements;
+
+  Serial.println("***Reading Light***");
+  IoTDevice.getLightLevel(lightReading);
+
+  formattedLightMeasurements = ", \"light\": \"";
+  formattedLightMeasurements+= lightReading;
+  formattedLightMeasurements += "\"";
+
+  return formattedLightMeasurements;
+}
 
 
 // The function demonstrates how to use the accel.x, accel.y and

@@ -29,7 +29,7 @@ bool initialize_my_mqtt() {
   ClientInfo.password_flag = true;
   ClientInfo.will_flag = false;
   ClientInfo.username = "TIC2018.azure-devices.net/TIC2018_Demo/api-version=2016-11-14";
-  ClientInfo.password = "SharedAccessSignature sr=xxxxxxxxxxxxxx";
+  ClientInfo.password = "SharedAccessSignature sr=xxxxxxxxxxxxxxxxxxxxx";
 
   LastWillMessage.topic = "devices/TIC2018_Demo/messages/events/LastWillTopc";
   LastWillMessage.content = "LastWillContent";
