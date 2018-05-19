@@ -13,7 +13,7 @@ bool connected;
 char TOPIC[128];
 char CONTENT[255];
 char MainBuffer[1024];
-#define HOST "[Hub Name].azure-devices.net"
+#define HOST "[Hub Name].azure-devices.net"   // Add Hub Name
 #define PORT 8883
 
 /*
