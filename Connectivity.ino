@@ -13,35 +13,34 @@ bool connected;
 char TOPIC[128];
 char CONTENT[255];
 char MainBuffer[1024];
-#define HOST "TIC2018.azure-devices.net"
+#define HOST "[Hub Name].azure-devices.net"
 #define PORT 8883
-#define DeviceName "TIC2018_Demo"
 
 /*
  * Set all the necessary flags to establish an MQTT connection with Azure
  */
 bool initialize_my_mqtt() {
-  ClientInfo.client_id = DeviceName;
+  ClientInfo.client_id = "[Device Name]";   // Add Device Name
   ClientInfo.keep_alive_sec = 60;
   ClientInfo.clean_session = true;
   ClientInfo.tls = true;
   ClientInfo.username_flag = true;
   ClientInfo.password_flag = true;
   ClientInfo.will_flag = false;
-  ClientInfo.username = "TIC2018.azure-devices.net/TIC2018_Demo/api-version=2016-11-14";
-  ClientInfo.password = "SharedAccessSignature sr=xxxxxxxxxxxxxxxxxxxxx";
+  ClientInfo.username = "[Hub Name].azure-devices.net/[Device Name]/api-version=2016-11-14";   // Add Hub Name and Device Name
+  ClientInfo.password = "SharedAccessSignature sr=xxxxxxxxxxxxxxxxxx";    // Add SR from SAS token
 
-  LastWillMessage.topic = "devices/TIC2018_Demo/messages/events/LastWillTopc";
+  LastWillMessage.topic = "devices/[Device Name]/messages/events/LastWillTopc";     // Add Device Name
   LastWillMessage.content = "LastWillContent";
   LastWillMessage.qos = 0;
   LastWillMessage.retain = false;
 
-  PublishMessage.topic = "devices/TIC2018_Demo/messages/events/";
+  PublishMessage.topic = "devices/[Device Name]/messages/events/";    // Add Device Name
   PublishMessage.content = "{ \"hello\": \"world\"}";
   PublishMessage.qos = 0;
   PublishMessage.retain = false;
 
-  SubscribeList[0].topic = "devices/TIC2018_Demo/messages/devicebound/#";
+  SubscribeList[0].topic = "devices/[Device Name]/messages/devicebound/#";    // Add Device Name
   SubscribeList[0].qos = 1;
 
   return true;
