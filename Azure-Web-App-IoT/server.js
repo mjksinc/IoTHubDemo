@@ -4,8 +4,10 @@ const WebSocket = require('ws');
 const moment = require('moment');
 const path = require('path');
 const iotHubClient = require('./IoTHub/iot-hub.js');
-
+const dotenv = require('dotenv');
 const app = express();
+
+dotenv.config();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res/*, next*/) {
