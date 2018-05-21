@@ -35,5 +35,7 @@ Go to [Azure Portal](https://portal.azure.com) to create your own Azure web app 
 * Open a console and set the following environment variable:
   * `set Azure.IoT.IoTHub.ConnectionString=<your connection string>`
   * `set Azure.IoT.IoTHub.ConsumerGroup=<your consumer group name>`
+* Copy .env-sample to .env
+* Edit .env to set `Azure.IoT.IoTHub.ConnectionString` and `Azure.IoT.IoTHub.ConsumerGroup`
 * `npm install`
 * `npm start`
